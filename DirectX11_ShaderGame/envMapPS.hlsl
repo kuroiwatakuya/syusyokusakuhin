@@ -35,6 +35,6 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     envtex.x = -refv.x * 0.3 + 0.5;
     envtex.y = -refv.y * 0.3 + 0.5;
     
-    outDiffuse.rgb = g_TextureEnv.Sample(g_SamplerState, envtex);
+    outDiffuse.rgb = g_TextureEnv.SampleBias(g_SamplerState, envtex,3.0);   //‰ğ‘œ“x‚ğ‰º‚°‚éˆ—
 
 }

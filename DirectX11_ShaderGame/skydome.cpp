@@ -17,9 +17,9 @@ void CSkydome::Init()
 	m_Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Scale = D3DXVECTOR3(10.0f, 10.0f, 10.0f);
 
-	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "unlitTextureVS.cso");
+	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "skyVS.cso");
 
-	CRenderer::CreatePixelShader(&m_PixelShader, "unlitTexturePS.cso");
+	CRenderer::CreatePixelShader(&m_PixelShader, "skyPS.cso");
 
 }
 //=======================================================
