@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\scene">
+      <UniqueIdentifier>{cbea576c-21a3-441b-bd78-ae6ad96d99f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object">
+      <UniqueIdentifier>{ae3b0ef8-8917-494e-83df-2ceab9a79238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\draw">
+      <UniqueIdentifier>{b395ce7b-13bf-44f1-a5cc-13dc97f2c17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object">
+      <UniqueIdentifier>{bf5bb02f-9bc4-45a6-9f98-414a8c063e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\draw">
+      <UniqueIdentifier>{1160e30c-edd4-4c4b-85e3-0c7115f777a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\scene">
+      <UniqueIdentifier>{a008e158-60e4-4a47-b1df-ec6042f17ee5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scene.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="animation_model.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="skydome.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="animation_model.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="skydome.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>ソース ファイル\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>ソース ファイル\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DirectX_Initilize.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="DirectX_Initilize.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="common.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="normalmapPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="normalmapVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelLightingPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelLightingVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="specularreflectPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="specularreflectVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="toonPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="toonVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitColorPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitColorVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTexturePS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTextureVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexLightingPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexLightingVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="envMapPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="envMapVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="parallaxocclusionPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="parallaxocclusionVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="PerlinNoizeVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="PerlinNoizePS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
