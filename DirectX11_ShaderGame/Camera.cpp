@@ -17,7 +17,7 @@
 void CCamera::Init()
 {
 	//ポジション、ターゲットの初期化
-	m_Position = D3DXVECTOR3(0.0f, 3.0f, -1.0f);		//カメラの位置
+	m_Position = D3DXVECTOR3(0.0f, 0.0f, -1.0f);		//カメラの位置
 	m_Target = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			//注視点
 }
 

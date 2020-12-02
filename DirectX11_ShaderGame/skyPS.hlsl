@@ -83,7 +83,6 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     float3 v3SamplePoint = v3Start + v3SampleRay * 0.5;
     
     float3 v3FrontColor = 0.0;
-    
     for (int n = 0; n < int(fsample);n++)
     {
         float fHeight = length(v3SamplePoint);
