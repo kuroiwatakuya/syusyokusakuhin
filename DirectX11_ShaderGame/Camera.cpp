@@ -46,7 +46,7 @@ void CCamera::Update()
 	//サードパーソン
 	D3DXVECTOR3 forward = player->GetForward();
 	m_Position = m_Target - forward * 5.0f + D3DXVECTOR3(0.0f, 2.0f, 0.0f);
-
+	
 }
 
 //========================================

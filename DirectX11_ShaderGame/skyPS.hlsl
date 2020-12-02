@@ -1,9 +1,11 @@
 #include "common.hlsl"
+
 #define PI                       3.141592
-#define INNERRADIUS     100
-#define OUTERRADIUS    250
+#define INNERRADIUS     10000
+#define OUTERRADIUS    10250
 #define KR                      0.0025
-#define KM                      0.0025
+#define KM                      0.001
+#define SPHERERAD        5125
 
 static const float fsample = 2.0;
 static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);
@@ -32,43 +34,52 @@ SamplerState g_SamplerState : register(s0);
 //===============================================
 //大気散乱シミュレーション
 //===============================================
+PS_IN vert(in PS_IN In)
+{
+    PS_IN o;
+    float4 vt = In.Position;
+    o.Position = mul(In.Position, World);
+    o.TexCoord = g_Texture.Sample(g_SamplerState, In.TexCoord);
+    o.WorldPosition = normalize(mul(World, vt).xyzw) * fouterRadius;
+    return o;
+}
+
 float Scale(float fcos)
 {
     float x = 1.0 - fcos;
-    return fScaleOverScaleDepth * exp(-0.00287 * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
+    return fScaleDepth * exp(-0.00287   * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
 }
+
+float3 IntersectionPos(float3 dir,float3 a,float radius)
+{
+    float b = dot(a, dir);
+    float c = dot(a, a) - radius * radius;
+    float d = max(b * b - c, 0.0);
+    
+    return a + dir * (-b + sqrt(d));
+}
+
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
-    float4 normal = normalize(In.Normal); //In.Normal = 渡された正規化した法線
     float3 worldpos = In.WorldPosition;
-    //ランバート拡散照明
-    float light = -dot(normal.xyz, Light.Direction.xyz);
-    light = saturate(light);
+    worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
-    outDiffuse = g_Texture.Sample(g_SamplerState, In.TexCoord);
-    outDiffuse.rgb *= In.Diffuse.rgb * light;
-    outDiffuse.a *= In.Diffuse.a;
+    float3 v3Camerapos = float3(0.0,finnerRadius,0.0);
+    float3 v3LightDir = normalize(Light.Direction.xyz);
     
-    //スペキュラ(フォン)
-    float3 v3Camerapos = CameraPosition;
-    v3Camerapos.y = finnerRadius;
+    float3 v3Ray = worldpos - v3Camerapos;
+    float fFar = length(v3Ray);
+    v3Ray /= fFar;
     
-    float3 eyev = In.WorldPosition.xyz - CameraPosition.xyz;
-    float3 Eyepos = eyev;
-    eyev = normalize(eyev); //正規化視線ベクトル
-    
-    float fFar = length(eyev);
-    eyev /= fFar;
-    
-    float3 v3Start = CameraPosition;
-    float fCameraHeight = length(CameraPosition);
-    float fStartAngle = dot(eyev, v3Start) / fCameraHeight;
+    float3 v3Start =v3Camerapos;
+    float fCameraHeight = length(v3Camerapos);
+    float fStartAngle = dot(v3Ray, v3Start) / fCameraHeight;
     float fStartDepth = exp(fScaleOverScaleDepth * (finnerRadius - fCameraHeight));
     float fStartOffset = fStartDepth * Scale(fStartAngle);
     
     float fSampleLength = fFar / fsample;
     float fScaledLength = fSampleLength * fScale;
-    float3 v3SampleRay = eyev * fSampleLength;
+    float3 v3SampleRay = v3Ray * fSampleLength;
     float3 v3SamplePoint = v3Start + v3SampleRay * 0.5;
     
     float3 v3FrontColor = 0.0;
@@ -77,8 +88,8 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     {
         float fHeight = length(v3SamplePoint);
         float fDepth = exp(fScaleOverScaleDepth * (finnerRadius - fHeight));
-        float fLightAngle = dot(light, v3SamplePoint) / fHeight;
-        float fCameraAngle = dot(eyev, v3SamplePoint) / fHeight;
+        float fLightAngle = dot(v3LightDir, v3SamplePoint) / fHeight;
+        float fCameraAngle = dot(v3Ray, v3SamplePoint) / fHeight;
         float fScatter = (fStartOffset + fDepth * (Scale(fLightAngle) - Scale(fCameraAngle)));
         float3 v3Attenuate = exp(-fScatter * (v3InvWave * fKr4PI + fKm4PI));
         v3FrontColor += v3Attenuate * (fDepth * fScaledLength);
@@ -89,12 +100,12 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     float3 c1 = v3FrontColor * fKmESun;
     float3 v3Direction = v3Camerapos - worldpos;
 
-    float fcos = dot(light, v3Direction) / length(v3Direction);
+    float fcos = dot(v3LightDir, v3Direction) / length(v3Direction);
     float fcos2 = fcos * fcos;
 
     float rayleighPhase = 0.75 * (1.0 + fcos2);
     float miePhase = 1.5 * ((1.0 - g2) / (2.0 + g2)) * (1.0 + fcos2) / pow(1.0 + g2 - 2.0 * g * fcos, 1.5);
-
-    float4 col = 1.0;
+    
+    outDiffuse = 1.0;
     outDiffuse.rgb = rayleighPhase * c0 + miePhase * c1;
 }

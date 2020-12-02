@@ -16,4 +16,5 @@ void main(in VS_IN In, out PS_IN Out)
     Out.Normal = worldNormal; //ここでピクセルシェーダーに法線情報を送っている。
     Out.Diffuse = In.Diffuse;
     Out.TexCoord = In.TexCoord;
+    float4 vt = In.Position;
 }
