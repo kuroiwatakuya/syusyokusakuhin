@@ -18,7 +18,7 @@ ID3D11InputLayout* CBullet::m_VertexLayout;
 void CBullet::Load()
 {
 	m_Model = new CModel();
-	m_Model->Load("asset\\model\\bullet.obj");
+	m_Model->Load("asset\\model\\Bullet.obj");
 
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "pixelLightingVS.cso");
 

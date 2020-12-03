@@ -7,6 +7,7 @@
 #include "scene.h"
 #include "Player.h"
 #include "input.h"
+#include "Bullet.h"
 
 //カメラヘッダーの前にDirectX関係のヘッダーをincludeする
 #include "Camera.h"

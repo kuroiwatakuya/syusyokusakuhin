@@ -1,5 +1,6 @@
 #include "common.hlsl"
 
+//定数
 #define PI                       3.141592
 #define INNERRADIUS     10000
 #define OUTERRADIUS    10250
@@ -8,7 +9,7 @@
 #define SPHERERAD        5125
 
 static const float fsample = 2.0;
-static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);
+static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);      //空の色
 static const float3 v3InvWave = 1.0 / pow(threePrimaryColors, 4.0);
 
 static const float fouterRadius = OUTERRADIUS;
@@ -38,7 +39,7 @@ PS_IN vert(in PS_IN In)
 {
     PS_IN o;
     float4 vt = In.Position;
-    o.Position = mul(In.Position, World);
+    o.Position = mul(World, In.Position);   //ここわからん
     o.TexCoord = g_Texture.Sample(g_SamplerState, In.TexCoord);
     o.WorldPosition = normalize(mul(World, vt).xyzw) * fouterRadius;
     return o;
@@ -47,9 +48,12 @@ PS_IN vert(in PS_IN In)
 float Scale(float fcos)
 {
     float x = 1.0 - fcos;
-    return fScaleDepth * exp(-0.00287   * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
+    return fScaleDepth * exp(-0.00287  * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
 }
 
+//=======================================
+//座標の計算
+//=======================================
 float3 IntersectionPos(float3 dir,float3 a,float radius)
 {
     float b = dot(a, dir);
@@ -59,13 +63,16 @@ float3 IntersectionPos(float3 dir,float3 a,float radius)
     return a + dir * (-b + sqrt(d));
 }
 
+//=======================================
+//メイン関数
+//=======================================
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
     float3 worldpos = In.WorldPosition;
     worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
     float3 v3Camerapos = float3(0.0,finnerRadius,0.0);
-    float3 v3LightDir = normalize(Light.Direction.xyz);
+    float3 v3LightDir = normalize(Light.Direction.xyz); //ここわからん
     
     float3 v3Ray = worldpos - v3Camerapos;
     float fFar = length(v3Ray);
