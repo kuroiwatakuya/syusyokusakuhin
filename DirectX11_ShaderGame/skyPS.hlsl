@@ -2,13 +2,13 @@
 
 //íËêî
 #define PI                       3.141592
-#define INNERRADIUS     10000
+#define INNERRADIUS     10100
 #define OUTERRADIUS    10250
 #define KR                      0.0025
-#define KM                      0.001
+#define KM                      0.008
 #define SPHERERAD        5125
 
-static const float fsample = 2.0;
+static const float fsample = 4.0;
 static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);      //ãÛÇÃêF
 static const float3 v3InvWave = 1.0 / pow(threePrimaryColors, 4.0);
 
@@ -48,7 +48,7 @@ PS_IN vert(in PS_IN In)
 float Scale(float fcos)
 {
     float x = 1.0 - fcos;
-    return fScaleDepth * exp(-0.00287  * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
+    return fScaleDepth * exp(-0.00287 +x  * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
 }
 
 //=======================================
@@ -72,7 +72,7 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
     float3 v3Camerapos = float3(0.0,finnerRadius,0.0);
-    float3 v3LightDir = normalize(Light.Direction.xyz); //Ç±Ç±ÇÌÇ©ÇÁÇÒ
+    float3 v3LightDir = normalize(-Light.Direction.xyz); //Ç±Ç±ÇÌÇ©ÇÁÇÒ
     
     float3 v3Ray = worldpos - v3Camerapos;
     float fFar = length(v3Ray);

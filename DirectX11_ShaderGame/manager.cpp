@@ -5,7 +5,8 @@
 #include "scene.h"
 
 CScene* CManager::m_Scene = NULL;
-
+D3DXVECTOR3  g_Position;
+LIGHT light;
 //========================================
 //初期化
 //========================================
@@ -19,6 +20,7 @@ void CManager::Init()
 	m_Scene = new CScene();
 	m_Scene->Init();
 
+	light.Direction = D3DXVECTOR4(0.0f, -2.0f, 0.0f, 0.0);
 }
 
 //========================================
@@ -40,6 +42,18 @@ void CManager::Update()
 {
 	CInput::Update();
 	m_Scene->Update();
+
+	//ディレクショナルライト移動
+	if (CInput::GetKeyPress('U'))
+	{
+		g_Position.y += 0.01f;
+		g_Position.x += 0.01f;
+	}
+	if (CInput::GetKeyPress('I'))
+	{
+		g_Position.y -= 0.01f;
+		g_Position.x -= 0.01f;
+	}
 }
 
 //========================================
@@ -52,9 +66,11 @@ void CManager::Draw()
 	CRenderer::Begin();
 	
 	//ライトを使いたいとき
-	LIGHT light;
+	
 	light.Enable = true;
-	light.Direction = D3DXVECTOR4(1.0f, -1.0f, 1.0f, 0.0f);
+
+
+	light.Direction = D3DXVECTOR4(g_Position.x, g_Position.y, 1.0f, 0.0f);
 	D3DXVec4Normalize(&light.Direction, &light.Direction);
 	light.Ambient = D3DXCOLOR(0.1f, 0.1f, 0.1f, 1.0f);
 	light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
