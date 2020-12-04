@@ -34,6 +34,7 @@ void CPlayer::Init()
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "toonVS.cso");
 
 	CRenderer::CreatePixelShader(&m_PixelShader, "toonPS.cso");
+	
 }
 
 //========================================

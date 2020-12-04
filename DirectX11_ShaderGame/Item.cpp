@@ -28,9 +28,9 @@ void CItem::Init()
 		NULL);
 	assert(m_TextureEnv);
 
-	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "envMapVS.cso");
+	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
 
-	CRenderer::CreatePixelShader(&m_PixelShader, "envMapPS.cso");
+	CRenderer::CreatePixelShader(&m_PixelShader, "brdfPS.cso");
 	//CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
 	//CRenderer::CreatePixelShader(&m_PixelShader, "brdfPS.cso");
 }

@@ -1,14 +1,14 @@
 #include "common.hlsl"
 
 //定数
-#define PI                       3.141592
-#define INNERRADIUS     10100
+#define PI                       3.14159265359
+#define INNERRADIUS     10000
 #define OUTERRADIUS    10250
 #define KR                      0.0025
-#define KM                      0.008
+#define KM                      0.01
 #define SPHERERAD        5125
 
-static const float fsample = 4.0;
+static const float fsample = 2.0;
 static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);      //空の色
 static const float3 v3InvWave = 1.0 / pow(threePrimaryColors, 4.0);
 
@@ -35,20 +35,20 @@ SamplerState g_SamplerState : register(s0);
 //===============================================
 //大気散乱シミュレーション
 //===============================================
-PS_IN vert(in PS_IN In)
+VERTEX vert(in VS_IN In)
 {
-    PS_IN o;
+    VERTEX o;
     float4 vt = In.Position;
-    o.Position = mul(World, In.Position);   //ここわからん
-    o.TexCoord = g_Texture.Sample(g_SamplerState, In.TexCoord);
-    o.WorldPosition = normalize(mul(World, vt).xyzw) * fouterRadius;
+    o.Position = mul(World, In.Position);   
+    o.UV = g_Texture.Sample(g_SamplerState, In.TexCoord);
+    o.WorldPos = normalize(mul(World, vt).xyz) * fouterRadius;
     return o;
 }
 
 float Scale(float fcos)
 {
     float x = 1.0 - fcos;
-    return fScaleDepth * exp(-0.00287 +x  * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
+    return fScaleDepth * exp(-0.00287 + x  * (0.459 + x * (3.83 + x * (-6.8 + x * 5.25))));
 }
 
 //=======================================
@@ -72,7 +72,7 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
     float3 v3Camerapos = float3(0.0,finnerRadius,0.0);
-    float3 v3LightDir = normalize(-Light.Direction.xyz); //ここわからん
+    float3 v3LightDir = normalize(Light.Direction.xyz); //ここわからん
     
     float3 v3Ray = worldpos - v3Camerapos;
     float fFar = length(v3Ray);

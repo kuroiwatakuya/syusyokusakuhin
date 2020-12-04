@@ -13,10 +13,10 @@ void CEnemy::Init()
 	m_Model = new CModel;
 	m_Model->Load("asset\\model\\Earth.obj");
 
-	m_Position = D3DXVECTOR3(1.0f, 1.0f, -2.0f);
+	m_Position = D3DXVECTOR3(1.0f, 2.0f, -2.0f);
 	m_Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	m_Scale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
-
+	m_Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
 
 	CRenderer::CreatePixelShader(&m_PixelShader, "brdfPS.cso");

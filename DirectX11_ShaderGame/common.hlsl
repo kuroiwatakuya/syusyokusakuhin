@@ -44,11 +44,18 @@ struct PS_IN
 
 struct VERTEX
 {
-    float4 Position : SV_Position;
-    half2 UV : TEXCOORD;
+    float4 Position : SV_POSITION;
+    half2 UV : TEXCOORD0;
     float3 WorldPos : TEXCOORD1;
     half3 WorldNormal : TEXCOORD2;
     half3 ViewDir : TEXCOORD3;
+};
+
+struct DATA
+{
+    float4 vertex : POSITION;
+    half2 texcoord : TEXCOORD0;
+    half3 normal : NORMAL;
 };
 
 

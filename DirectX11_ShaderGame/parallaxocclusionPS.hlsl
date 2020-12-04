@@ -77,7 +77,7 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     normal = normalize(normal);
     
     //ランバート拡散照明
-    float light = -dot(normal.xyz, Light.Direction.xyz);
+    float light = dot(normal.xyz, Light.Direction.xyz);
     light = saturate(light); //ライトベクトル
     
     outDiffuse.rgb *= In.Diffuse.rgb * light;
