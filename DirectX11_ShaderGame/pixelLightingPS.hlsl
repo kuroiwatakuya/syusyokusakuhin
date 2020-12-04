@@ -8,7 +8,7 @@ void main(in PS_IN In,out float4 outDiffuse:SV_Target)
     float4 normal = normalize(In.Normal);   //In.Normal = 渡された正規化した法線
     
     //ランバート拡散照明
-    float light = -dot(normal.xyz, Light.Direction.xyz);
+    float light = dot(normal.xyz, Light.Direction.xyz);
     light = saturate(light);
     
     outDiffuse = g_Texture.Sample(g_SamplerState, In.TexCoord);
@@ -29,8 +29,8 @@ void main(in PS_IN In,out float4 outDiffuse:SV_Target)
     
     //outDiffuse.rgb += specular;      //反射の強さ
     
-    //リムライト
-    float rim = 1.0f + dot(eyev, normal.xyz);
-    rim = pow(rim, 2) * 0.5f;
-    outDiffuse.rgb += rim;
+    ////リムライト
+    //float rim = 1.0f + dot(eyev, normal.xyz);
+    //rim = pow(rim, 2) * 0.5f;
+    //outDiffuse.rgb += rim;
 }

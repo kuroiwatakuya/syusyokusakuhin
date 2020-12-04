@@ -48,6 +48,7 @@ void CRenderer::Init()
 		NULL,
 		&m_ImmediateContext);
 
+	//現在使用できるMSAAのレベルの取得
 	DXGI_SAMPLE_DESC sampleDesc = {};
 	for (int i = 1; i <= D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT; i <<= 1)
 	{
@@ -62,7 +63,7 @@ void CRenderer::Init()
 		}
 	}
 	
-	// デバイス、スワップチェーン、コンテキスト生成
+	//スワップチェーン生成
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.BufferCount = 2;					//変更
