@@ -42,6 +42,15 @@ struct PS_IN
     float4 Binormal          : BINORMAL0;
 };
 
+struct VERTEX
+{
+    float4 Position : SV_Position;
+    half2 UV : TEXCOORD;
+    float3 WorldPos : TEXCOORD1;
+    half3 WorldNormal : TEXCOORD2;
+    half3 ViewDir : TEXCOORD3;
+};
+
 
 //マテリアルバッファ
 //構造体のサイズが決まっている(16バイトの倍数じゃないとうけとれない)

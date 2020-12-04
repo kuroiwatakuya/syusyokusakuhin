@@ -17,9 +17,9 @@ void CEnemy::Init()
 	m_Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Scale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 
-	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "pixelLightingVS.cso");
+	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
 
-	CRenderer::CreatePixelShader(&m_PixelShader, "pixelLightingPS.cso");
+	CRenderer::CreatePixelShader(&m_PixelShader, "brdfPS.cso");
 }
 //==================================================
 //エネミーの終了処理
