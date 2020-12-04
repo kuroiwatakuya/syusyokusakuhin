@@ -32,11 +32,40 @@ ID3D11DepthStencilState* CRenderer::m_DepthStateDisable = NULL;
 void CRenderer::Init()
 {
 	HRESULT hr = S_OK;
+	UINT SampleCount = 4;
+	UINT Quality = 0;
 
+	//デバイスの作成
+	hr = D3D11CreateDevice(
+		NULL,
+		D3D_DRIVER_TYPE_HARDWARE,
+		NULL,
+		0,
+		NULL,
+		0,
+		D3D11_SDK_VERSION,
+		&m_D3DDevice,
+		NULL,
+		&m_ImmediateContext);
+
+	DXGI_SAMPLE_DESC sampleDesc = {};
+	for (int i = 1; i <= D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT; i <<= 1)
+	{
+		UINT Quality;
+		if (SUCCEEDED(m_D3DDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_D24_UNORM_S8_UINT, i, &Quality)))
+		{
+			if (0 < Quality)
+			{
+				sampleDesc.Count = i;
+				sampleDesc.Quality = Quality - 1;
+			}
+		}
+	}
+	
 	// デバイス、スワップチェーン、コンテキスト生成
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(sd));
-	sd.BufferCount = 1;
+	sd.BufferCount = 2;					//変更
 	sd.BufferDesc.Width = SCREEN_WIDTH;
 	sd.BufferDesc.Height = SCREEN_HEIGHT;
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -44,23 +73,18 @@ void CRenderer::Init()
 	sd.BufferDesc.RefreshRate.Denominator = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.OutputWindow = GetWindow();
-	sd.SampleDesc.Count = 1;
-	sd.SampleDesc.Quality = 0;
 	sd.Windowed = TRUE;
+	/*sd.SampleDesc.Count = 1;
+	sd.SampleDesc.Quality = 0;*/
 
-	hr = D3D11CreateDeviceAndSwapChain(NULL,
-		D3D_DRIVER_TYPE_HARDWARE,
-		NULL,
-		0,
-		NULL,
-		0,
-		D3D11_SDK_VERSION,
-		&sd,
-		&m_SwapChain,
-		&m_D3DDevice,
-		&m_FeatureLevel,
-		&m_ImmediateContext);
-
+	sd.SampleDesc = sampleDesc;
+	IDXGIDevice1* hpDXGI;
+	m_D3DDevice->QueryInterface(__uuidof(IDXGIDevice1), reinterpret_cast<void**>(&hpDXGI));
+	IDXGIAdapter* hpAdapter;
+	hpDXGI->GetAdapter(&hpAdapter);
+	IDXGIFactory* fac;
+	hpAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&fac));
+	fac->CreateSwapChain(m_D3DDevice, &sd, &m_SwapChain);
 
 	// レンダーターゲットビュー生成、設定
 	//ポリゴンとかを描画する処理
@@ -68,8 +92,6 @@ void CRenderer::Init()
 	m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 	m_D3DDevice->CreateRenderTargetView(pBackBuffer, NULL, &m_RenderTargetView);
 	pBackBuffer->Release();
-
-
 
 	//深度ステンシル用テクスチャー作成
 	//奥行き情報を管理するバッファ
@@ -81,7 +103,7 @@ void CRenderer::Init()
 	td.MipLevels = 1;
 	td.ArraySize = 1;
 	td.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	td.SampleDesc = sd.SampleDesc;
+	td.SampleDesc = sampleDesc;
 	td.Usage = D3D11_USAGE_DEFAULT;
 	td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	td.CPUAccessFlags = 0;
@@ -92,7 +114,7 @@ void CRenderer::Init()
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
 	ZeroMemory(&dsvd, sizeof(dsvd));
 	dsvd.Format = td.Format;
-	dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
 	dsvd.Flags = 0;
 	m_D3DDevice->CreateDepthStencilView(depthTexture, &dsvd, &m_DepthStencilView);
 
