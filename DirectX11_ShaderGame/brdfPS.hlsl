@@ -81,7 +81,7 @@ half4 BRDF(half3 albedo, half metallic, half perceptualRoughness, float3 normal,
     float3 F = F_Schlick(f0, ldoth); // マイクロファセットベースのスペキュラBRDFではcosはldothが使われる
     float3 specular = V * D * F * ndotl * lightColor;
     
-    //specular *= UNITY_PI;
+    specular *= PI;
     specular = max(0, specular);
 
     half3 color = diffuse + specular;
@@ -95,7 +95,7 @@ VERTEX vertex(DATA d)
     o.UV = g_Texture.Sample(g_SamplerState, d.texcoord);
     o.WorldPos = mul(World, d.vertex).xyz;
     o.WorldNormal = normalize(mul(d.normal.xyz, d.vertex.xyz));
-    o.ViewDir = o.WorldPos-CameraPosition.xyz;
+    o.ViewDir = CameraPosition.xyz - o.WorldPos.xyz;
     
     //間接光の拡散反射取得
     //Material.Ambirnt.rgb = 
@@ -112,5 +112,5 @@ void main(in VERTEX In, out float4 outDiffuse : SV_Target)
     In.ViewDir = normalize(In.ViewDir);
     
     //outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal, In.ViewDir, Light.Direction.xyz, lightcolor0.rgb);
-    outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal, In.ViewDir, Light.Direction.xyz, Light.Diffuse.rgb);
+    outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal.xyz, In.ViewDir.xyz, Light.Direction.xyz, Light.Diffuse.rgb);
 }

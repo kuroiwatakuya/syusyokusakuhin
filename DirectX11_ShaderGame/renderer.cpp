@@ -75,10 +75,8 @@ void CRenderer::Init()
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.OutputWindow = GetWindow();
 	sd.Windowed = TRUE;
-	/*sd.SampleDesc.Count = 1;
-	sd.SampleDesc.Quality = 0;*/
-
 	sd.SampleDesc = sampleDesc;
+
 	IDXGIDevice1* hpDXGI;
 	m_D3DDevice->QueryInterface(__uuidof(IDXGIDevice1), reinterpret_cast<void**>(&hpDXGI));
 	IDXGIAdapter* hpAdapter;
