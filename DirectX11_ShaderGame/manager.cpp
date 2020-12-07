@@ -20,7 +20,7 @@ void CManager::Init()
 	m_Scene = new CScene();
 	m_Scene->Init();
 
-	g_Position = D3DXVECTOR3(0.0f, 2.0f, 0.0f);
+	g_Position = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 }
 
 //========================================
@@ -70,7 +70,7 @@ void CManager::Draw()
 	light.Enable = true;
 
 
-	light.Direction = D3DXVECTOR4(g_Position.x, g_Position.y, 1.0f, 0.0f);
+	light.Direction = D3DXVECTOR4(g_Position.x, g_Position.y, 1.0f, 1.0f);
 	D3DXVec4Normalize(&light.Direction, &light.Direction);
 	light.Ambient = D3DXCOLOR(0.1f, 0.1f, 0.1f, 1.0f);
 	light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);

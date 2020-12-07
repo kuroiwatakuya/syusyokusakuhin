@@ -10,7 +10,7 @@ float roughness;
 #define DILECTRICF0 0.04    //óUìdëÃÇÃîΩéÀó¶(F0)ÇÕ4Åì
 #define PI 3.1415926535      //â~é¸ó¶
 #define INV_PI 0.31830988618
-#define ROUGHNESS 0.2
+#define ROUGHNESS 0.5
 #define METALLIC 0.0
 
 //ê≥íºÉTÉìÉvÉãÇå©ÇƒÇ‚Ç¡ÇΩÇæÇØÇ»ÇÃÇ≈ÇµÇ¡Ç©ÇËóùâÇ≈Ç´ÇƒÇÕÇ»Ç¢Ç≈Ç∑
@@ -26,7 +26,7 @@ inline half Fd_Burley(half ndotv, half ndotl, half ldoth, half roughness)
     half viewScatter = (1 + (fd90 - 1) * pow(1 - ndotv, 5));
     
     half diffuse = lightScatter * viewScatter; 
-    diffuse /= PI;
+    //diffuse /= PI;
     return diffuse;
 }
 //===========================================================
@@ -47,7 +47,7 @@ inline half D_GGX(half perceptualRoughness, half ndoth, half3 normal, half3 half
     half a = ndoth * perceptualRoughness;
     half k = perceptualRoughness / (dot(ncrossh, ncrossh) + a * a);
     half d = k * k * INV_PI;
-    return min(d, 65504.0);
+    return min(d, 65504.0h);
 }
 
 //===========================================================
@@ -90,7 +90,7 @@ half4 BRDF(half3 albedo, half metallic, half perceptualRoughness, float3 normal,
 
 VERTEX vertex(DATA d)
 {
-    VERTEX o = (VERTEX) 0;
+    VERTEX o = (VERTEX)0;
     o.Position = mul(World, d.vertex);
     o.UV = g_Texture.Sample(g_SamplerState, d.texcoord);
     o.WorldPos = mul(World, d.vertex).xyz;
@@ -104,7 +104,7 @@ VERTEX vertex(DATA d)
 
 void main(in VERTEX In, out float4 outDiffuse : SV_Target)
 {
-    half3 albedo = g_Texture.Sample(g_SamplerState, In.UV).rgb * Color.rgb;
+    half3 albedo = g_Texture.Sample(g_SamplerState, In.UV).rgb *  Color.rgb;
     half metallic = METALLIC;
     half perceptualRoughness = ROUGHNESS;
 
@@ -112,5 +112,5 @@ void main(in VERTEX In, out float4 outDiffuse : SV_Target)
     In.ViewDir = normalize(In.ViewDir);
     
     //outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal, In.ViewDir, Light.Direction.xyz, lightcolor0.rgb);
-    outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal.xyz, In.ViewDir.xyz, Light.Direction.xyz, Light.Diffuse.rgb);
+    outDiffuse = BRDF(albedo, metallic, perceptualRoughness, In.WorldNormal, In.ViewDir, Light.Direction.xyz, Light.Diffuse.rgb);
 }
