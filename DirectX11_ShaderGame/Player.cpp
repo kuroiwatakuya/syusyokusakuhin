@@ -34,7 +34,7 @@ void CPlayer::Init()
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "pixelLightingVS.cso");
 
 	CRenderer::CreatePixelShader(&m_PixelShader, "pixelLightingPS.cso");
-	
+
 }
 
 //========================================
@@ -48,6 +48,7 @@ void CPlayer::Uninit()
 	m_PixelShader->Release();
 	m_VertexLayout->Release();
 	m_VertexShader->Release();
+
 }
 
 //========================================
@@ -139,10 +140,9 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	CRenderer::GetDeviceContext()->IASetInputLayout(m_VertexLayout);
-
+	
 	//シェーダ設定
 	CRenderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
-
 	CRenderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
 	//マトリクス設定

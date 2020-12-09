@@ -14,6 +14,10 @@ private:
 	ID3D11PixelShader* m_PixelShader;
 	ID3D11InputLayout* m_VertexLayout;
 
+	ID3D11VertexShader* m_VertexShader2;
+	ID3D11PixelShader* m_PixelShader2;
+	ID3D11InputLayout* m_VertexLayout2;
+
 public:
 	
 	CPlayer(){}	//コンストラクタ	

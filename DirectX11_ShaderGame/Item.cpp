@@ -65,6 +65,7 @@ void CItem::Draw()
 	CRenderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 
 	CRenderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
+
 	//マトリクス設定
 	D3DXMATRIX world, scale, rot, trans;
 	D3DXMatrixScaling(&scale, m_Scale.x, m_Scale.y, m_Scale.z);	//拡大縮小
