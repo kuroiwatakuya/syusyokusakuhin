@@ -156,7 +156,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="game_object.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Item.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="skydome.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp" />
@@ -177,7 +180,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -188,6 +193,7 @@
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="skydome.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Initilize.rc" />

@@ -3,7 +3,7 @@
 #include <vector>
 #include "main.h"
 #include "game_object.h"
-#include "Camera.h"
+
 #include "Field.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -11,6 +11,8 @@
 #include "Item.h"
 #include "polygon.h"
 #include "skydome.h"
+#include "Camera.h"
+#include "scene.h"
 #include <typeinfo>
 
 #define GAMEOBJECT_SIZE 3		//リストの数
@@ -24,40 +26,8 @@ protected:
 	std::list<CGameObject*> m_GameObject[GAMEOBJECT_SIZE];
 
 public:
-	CScene(){}
-	virtual ~CScene(){}
-
-	//==================================
-	//シーンの初期化
-	//==================================
-	virtual void Init()
-	{
-		CBullet::Load();
-
-		//レイヤー
-		//カメラ:0
-		//3Dオブジェクト:1
-		//2Dオブジェクト:2
-		AddGameObject<CCamera>(0);
-		AddGameObject<CField>(1);
-		AddGameObject<CPlayer>(1);
-		AddGameObject<CSkydome>(1);
-
-		//敵配置
-		//敵を追加するときはここ
-		AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(-5.0f,0.0f,5.0f));
-		AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(0.0f, 0.0f, 5.0f));
-		AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(5.0f,0.0f,5.0f));
-
-		//アイテム配置
-		//アイテムの追加するときはここ
-		AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-3.0f, 0.0f, 2.0f));
-		AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-1.0f, 0.0f, 3.0));
-		AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(1.0f, 0.0f, 1.0f));
-
-		//2Dオブジェクト
-		AddGameObject<CPolygon>(2);
-	}
+	CScene() {}
+	virtual ~CScene() {}
 
 	//==================================
 	//シーンの終了処理
@@ -93,9 +63,9 @@ public:
 			m_GameObject[i].remove_if
 			(
 				[](CGameObject* object)
-				{
-					return object->Destoroy(); /*ここまでが引数 リストに入ってる要素ごとに実行 関数を実行して戻り値がtrueならリストから消す。*/
-				}
+			{
+				return object->Destoroy(); /*ここまでが引数 リストに入ってる要素ごとに実行 関数を実行して戻り値がtrueならリストから消す。*/
+			}
 			);
 		}
 		//ラムダ式
