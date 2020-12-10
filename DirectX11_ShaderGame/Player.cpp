@@ -60,7 +60,7 @@ void CPlayer::Update()
 
 	m_Frame++;		//アニメーションフレーム
 
-	m_Model->Update("Idle", "Run", m_BlendRate, m_Frame);
+	//m_Model->Update("Idle", "Run", m_BlendRate, m_Frame);
 
 	//プレイヤー移動その2
 	if (CInput::GetKeyPress('A'))
@@ -79,7 +79,7 @@ void CPlayer::Update()
 		m_Position += forward * 0.1f;
 
 		m_BlendRate += 0.03f;
-		m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
+		//m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
 
 		D3DXQUATERNION quat;
 		
@@ -91,7 +91,7 @@ void CPlayer::Update()
 		m_Position -= forward * 0.1f;
 
 		m_BlendRate += 0.03f;
-		m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
+		//m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
 		
 		D3DXQUATERNION quat;
 	}

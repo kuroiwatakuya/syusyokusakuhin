@@ -8,7 +8,7 @@
 #define KM                      0.01
 #define SPHERERAD        5125
 
-static const float fsample = 2.0;
+static const float fsample = 4.0;
 static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);      //ãÛÇÃêF
 static const float3 v3InvWave = 1.0 / pow(threePrimaryColors, 4.0);
 
@@ -72,7 +72,7 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
     float3 v3Camerapos = float3(0.0,finnerRadius,0.0);
-    float3 v3LightDir = normalize(Light.Direction.xyz); //Ç±Ç±ÇÌÇ©ÇÁÇÒ
+    float3 v3LightDir = normalize(Light.Direction.xyz); 
     
     float3 v3Ray = worldpos - v3Camerapos;
     float fFar = length(v3Ray);

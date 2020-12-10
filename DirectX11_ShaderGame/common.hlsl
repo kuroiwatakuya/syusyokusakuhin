@@ -42,23 +42,22 @@ struct PS_IN
     float4 Binormal          : BINORMAL0;
 };
 
+struct DATA
+{
+    float4 vertex : POSITION;
+    half2 texcoord : TEXCOORD0;
+    half3 normal : NORMAL;
+};
+
 struct VERTEX
 {
     float4 Position : SV_POSITION;
     half2 UV : TEXCOORD0;
     float3 WorldPos : TEXCOORD1;
-    float4 WorldNormal : TEXCOORD2;
+    half3 WorldNormal : TEXCOORD2;
     half3 ViewDir : TEXCOORD3;
+    half3 LightDir : TEXCOORD4;
 };
-
-struct DATA
-{
-    float4 vertex : POSITION;
-    half2 texcoord : TEXCOORD0;
-    float4 normal : NORMAL;
-    float Dammy;
-};
-
 
 //マテリアルバッファ
 //構造体のサイズが決まっている(16バイトの倍数じゃないとうけとれない)
