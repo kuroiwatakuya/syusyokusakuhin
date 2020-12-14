@@ -8,7 +8,7 @@
 #define KM                      0.01
 #define SPHERERAD        5125
 
-static const float fsample = 4.0;
+static const float fsample = 2.0;
 static const float3 threePrimaryColors = float3(0.68, 0.55, 0.44);      //ãÛÇÃêF
 static const float3 v3InvWave = 1.0 / pow(threePrimaryColors, 4.0);
 

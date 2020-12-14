@@ -32,9 +32,7 @@ void CPlayer::Init()
 	m_Frame = 0;
 
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "pixelLightingVS.cso");
-
 	CRenderer::CreatePixelShader(&m_PixelShader, "pixelLightingPS.cso");
-
 }
 
 //========================================
@@ -78,21 +76,17 @@ void CPlayer::Update()
 	{
 		m_Position += forward * 0.1f;
 
-		m_BlendRate += 0.03f;
+		m_BlendRate += 0.01f;
 		//m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
-
 		D3DXQUATERNION quat;
-		
 	}
 	
 	if (CInput::GetKeyPress('S'))
 	{
-		
-		m_Position -= forward * 0.1f;
+		m_Position += -forward * 0.1f;
 
-		m_BlendRate += 0.03f;
+		m_BlendRate += 0.01f;
 		//m_Model->Update("Run", "Idle", m_BlendRate, m_Frame);
-		
 		D3DXQUATERNION quat;
 	}
 	

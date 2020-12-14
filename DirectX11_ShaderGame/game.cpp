@@ -30,7 +30,7 @@ void CGame::Init()
 	//惑星配置
 	//惑星を追加するときはここ
 	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(-10.0f, 0.0f, 0.0f));			//地球
-	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));			//地球
+	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 10.0f));			//地球
 	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 0.0f));			//地球
 
 	//アイテム配置

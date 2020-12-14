@@ -5,6 +5,7 @@
 #include "scene.h"
 #include "Fade.h"
 #include "title.h"
+#include "game.h"
 
 CScene* CManager::m_Scene = NULL;
 D3DXVECTOR3 g_Position;
@@ -23,9 +24,9 @@ void CManager::Init()
 	CFade::Init();
 
 	//タイトル呼び出し
-	SetScene<CTitle>();
+	SetScene<CGame>();
 
-	g_Position = D3DXVECTOR3(1.0f, 0.0f, 1.0f);
+	g_Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 }
 
 //========================================
@@ -52,13 +53,13 @@ void CManager::Update()
 
 	if (CInput::GetKeyPress('U'))
 	{
-		g_Position.x += 0.1f;
-		g_Position.y += 0.1f;
+		g_Position.x += 0.01f;
+		g_Position.y += 0.01f;
 	}
 	if (CInput::GetKeyPress('I'))
 	{
-		g_Position.x -= 0.1f;
-		g_Position.y -= 0.1f;
+		g_Position.x -= 0.01f;
+		g_Position.y -= 0.01f;
 	}
 }
 

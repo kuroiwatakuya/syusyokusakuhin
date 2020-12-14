@@ -56,6 +56,7 @@ void CPolygon::Init()
 																		&m_Texture,
 																		NULL);
 
+	
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "unlitTextureVS.cso");
 
 	CRenderer::CreatePixelShader(&m_PixelShader, "unlitTexturePS.cso");
@@ -96,6 +97,14 @@ void CPolygon::Draw()
 	CRenderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 
 	CRenderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
+
+	//マトリクス設定
+	D3DXMATRIX world, scale, rot, trans;
+	D3DXMatrixScaling(&scale, m_Scale.x, m_Scale.y, m_Scale.z);	//拡大縮小
+	D3DXMatrixRotationYawPitchRoll(&rot, m_Rotation.y, m_Rotation.x, m_Rotation.z); //回転のマトリックス(設定はy,x,zの順番)
+	D3DXMatrixTranslation(&trans, m_Position.x, m_Position.y, m_Position.z);	//座標
+	world = scale * rot * trans;	//3つの合成(普通の掛け算ではない)
+	CRenderer::SetWorldMatrix(&world);
 
 	//ライト無効
 	LIGHT light;
