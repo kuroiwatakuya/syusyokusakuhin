@@ -32,6 +32,8 @@ void CGame::Init()
 	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(-10.0f, 0.0f, 0.0f));			//地球
 	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 10.0f));			//地球
 	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 0.0f));			//地球
+	AddGameObject<CEnemy>(1)->SetPosition(D3DXVECTOR3(5.0f, 0.0f, 5.0f));			//地球
+
 
 	//アイテム配置
 	//アイテムの追加するときはここ

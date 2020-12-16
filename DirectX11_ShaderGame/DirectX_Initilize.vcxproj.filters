@@ -66,9 +66,6 @@
     <ClInclude Include="Item.h">
       <Filter>ヘッダー ファイル\object</Filter>
     </ClInclude>
-    <ClInclude Include="model.h">
-      <Filter>ヘッダー ファイル\object</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\object</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
     <ClInclude Include="Fade.h">
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp">
@@ -120,9 +120,6 @@
       <Filter>ソース ファイル\object</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>ソース ファイル\object</Filter>
-    </ClCompile>
-    <ClCompile Include="model.cpp">
       <Filter>ソース ファイル\object</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -157,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Fade.cpp">
       <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>ソース ファイル\draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +246,12 @@
       <Filter>リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="brdfPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="flowMapVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="flowMapPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>

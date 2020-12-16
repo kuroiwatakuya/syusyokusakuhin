@@ -17,23 +17,42 @@ void CEnemy::Init()
 	m_Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
+
+	//ハイトマップ読み込み
+	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
+		"asset/texture/Stainless_albedo.tif",
+		NULL,
+		NULL,
+		&m_Texture,
+		NULL);
+	assert(m_Texture);
+
 	//法線マップ読み込み
 	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
-		"asset/texture/ConcreteGeometric3_512_normal.tif",
+		"asset/texture/Stainless_normal.tif",
 		NULL,
 		NULL,
 		&m_TextureNormal,
 		NULL);
 	assert(m_TextureNormal);
 
-	//ハイトマップ読み込み
+	//メタリック
 	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
-		"asset/texture/ConcreteGeometric3_512_albedo.tif",
+		"asset/texture/Stainless_metall.tif",
 		NULL,
 		NULL,
-		&m_TextureHeight,
+		&m_TextureMetall,
 		NULL);
-	assert(m_TextureHeight);
+	assert(m_TextureMetall);
+
+	//ラフネス
+	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
+		"asset/texture/Stainless_roughness.tif",
+		NULL,
+		NULL,
+		&m_TextureRoughness,
+		NULL);
+	assert(m_TextureRoughness);
 	
 	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
 
@@ -50,9 +69,10 @@ void CEnemy::Uninit()
 	m_PixelShader->Release();
 	m_VertexLayout->Release();
 	m_VertexShader->Release();
-
+	m_Texture->Release();
 	m_TextureNormal->Release();
-	m_TextureHeight->Release();
+	m_TextureMetall->Release();
+	m_TextureRoughness->Release();
 }
 //==================================================
 //エネミーの更新処理
@@ -81,8 +101,10 @@ void CEnemy::Draw()
 	D3DXMatrixTranslation(&trans, m_Position.x, m_Position.y, m_Position.z);	//座標
 	world = scale * rot * trans;	//3つの合成(普通の掛け算ではない)
 
-	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_TextureNormal);		//第一引数:2番目のテクスチャーとして登録する 第二引数:配列番号
-	CRenderer::GetDeviceContext()->PSSetShaderResources(1, 1, &m_TextureHeight);
+	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);		//第一引数:2番目のテクスチャーとして登録する 第二引数:配列番号
+	CRenderer::GetDeviceContext()->PSSetShaderResources(1, 1, &m_TextureNormal);
+	CRenderer::GetDeviceContext()->PSSetShaderResources(2, 1, &m_TextureMetall);
+	CRenderer::GetDeviceContext()->PSSetShaderResources(3, 1, &m_TextureRoughness);
 
 	CRenderer::SetWorldMatrix(&world);
 

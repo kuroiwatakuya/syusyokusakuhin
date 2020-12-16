@@ -224,7 +224,6 @@ void CAnimationModel::Unload()
 		pair.second->Release();
 	}
 	
-
 	aiReleaseImport(m_Scene);
 }
 

@@ -89,3 +89,15 @@ cbuffer LightBuffer : register(b4)
 {
     LIGHT Light;
 }
+
+//時間構造体
+struct Time
+{
+    float Time;
+};
+
+//時間バッファー
+cbuffer TimeBuffer : register(b7)
+{
+    Time time;
+}

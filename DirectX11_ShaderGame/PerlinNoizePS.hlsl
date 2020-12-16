@@ -15,21 +15,11 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     outDiffuse.rgb *= In.Diffuse.rgb * light;
     outDiffuse.a *= In.Diffuse.a;
     
-    
     //スペキュラ(フォン)
     float3 eyev = In.WorldPosition.xyz - CameraPosition.xyz;
     float3 Eyepos = eyev;
     eyev = normalize(eyev); //正規化視線ベクトル 
      
-    //float3 refv = reflect(Light.Direction.xyz, normal.xyz); //反射ベクトル取得
-    //refv = normalize(refv);                     //正規化した反射ベクトル
-    
-    //float specular = -dot(eyev, refv);  //内積
-    //specular = saturate(specular);
-    //specular = pow(specular, 30);       //反射の鋭さ
-    
-    //outDiffuse.rgb += specular;      //反射の強さ
-    
     //リムライト
     float rim = 1.0f + dot(eyev, normal.xyz);
     rim = pow(rim, 2) * 0.5f;

@@ -1,20 +1,17 @@
 #include "common.hlsl"
 
-Texture2D g_Texture : register(t1);
-Texture2D g_TextureNormal : register(t0);
-SamplerState g_SamplerState;
+Texture2D g_Texture : register(t0);
+Texture2D g_TextureNormal : register(t1);
+Texture2D g_TextureMetallic : register(t2);
+Texture2D g_TextureRoughness : register(t3);
 
-float Metallic;
-float roughness;
+SamplerState g_SamplerState;
 
 #define DILECTRICF0 0.04  //誘電体の反射率(F0)は4％
 #define PI 3.1415926535      //円周率
 #define INV_PI 0.31830988618
-#define ROUGHNESS 0.5
-#define METALLIC 0.1
-
-//正直サンプルを見てやっただけなのでしっかり理解できてはないです
-//これから理解していきます
+#define ROUGHNESS 0.5           //メタリック仮定数
+#define METALLIC 0.1                //ラフネス仮定数
 
 //===========================================================
 //拡散反射
@@ -101,15 +98,28 @@ void main(in PS_IN In,out float4 outDiffuse : SV_Target)
     normalMap.w = 0.0f;
     normalMap = normalize(normalMap);
     
+    //メタリック
+    float4 metallMap = g_TextureMetallic.Sample(g_SamplerState, In.TexCoord);
+    metallMap = (metallMap * 2.0) - 1.0;
+    metallMap = (-metallMap.x * In.Tangent) + (metallMap.y * In.Binormal) + (metallMap.z * In.Normal);
+    metallMap.w = 0.0f;
+    metallMap = normalize(metallMap);
+   
+    //ラフネス
+    float4 roughnessMap = g_TextureRoughness.Sample(g_SamplerState, In.TexCoord);
+    roughnessMap = (roughnessMap * 2.0) - 1.0;
+    roughnessMap = (-roughnessMap.x * In.Tangent) + (roughnessMap.y * In.Binormal) + (roughnessMap.z * In.Normal);
+    roughnessMap.w = 0.0f;
+    roughnessMap = normalize(roughnessMap);
+    
     //座標変換が必要
     float4 normal = normalMap;
     normal = normalize(normal);
     
-    half3 albedo = g_Texture.Sample(g_SamplerState, In.TexCoord).rgb;
-    half metallic = METALLIC;
-    half perceptualRoughness = ROUGHNESS;
+    half3 albedo = g_Texture.Sample(g_SamplerState, In.TexCoord).rgb;        //通常テクスチャの色
+    half metallic = metallMap;                                                                      //メタリック
+    half perceptualRoughness = roughnessMap;                                            //ラフネス
     float3 ViewDir = In.WorldPosition.xyz - CameraPosition.xyz;
-    
     ViewDir = normalize(ViewDir);
    
     outDiffuse = BRDF(albedo, metallic, perceptualRoughness, normal.xyz, ViewDir, Light.Direction.xyz, Light.Diffuse.rgb);

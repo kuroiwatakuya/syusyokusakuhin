@@ -29,6 +29,7 @@
 //
 #pragma comment (lib, "d3dx9.lib")
 #pragma comment (lib, "d3dx11.lib")
+#pragma comment (lib,"winmm.lib")
 
 
 #define SCREEN_WIDTH	    (1920)			// ウインドウの幅

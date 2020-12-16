@@ -13,8 +13,10 @@ private:
 	ID3D11PixelShader* m_PixelShader;
 	ID3D11InputLayout* m_VertexLayout;
 
-	ID3D11ShaderResourceView* m_TextureNormal;			//法線マップテクスチャ
-	ID3D11ShaderResourceView* m_TextureHeight;			//ハイトマップテクスチャ
+	ID3D11ShaderResourceView* m_Texture;							//アルベドテクスチャ
+	ID3D11ShaderResourceView* m_TextureNormal;					//法線マップテクスチャ
+	ID3D11ShaderResourceView* m_TextureMetall;					//メタリックテクスチャ
+	ID3D11ShaderResourceView* m_TextureRoughness;			//ラフネステクスチャ
 
 public:
 	CEnemy(){}

@@ -18,6 +18,7 @@ ID3D11Buffer* CRenderer::m_ViewBuffer = NULL;
 ID3D11Buffer* CRenderer::m_ProjectionBuffer = NULL;
 ID3D11Buffer* CRenderer::m_MaterialBuffer = NULL;
 ID3D11Buffer* CRenderer::m_LightBuffer = NULL;
+ID3D11Buffer* CRenderer::m_TimeBuffer = NULL;
 
 ID3D11Buffer* CRenderer::m_CameraBuffer = NULL;
 ID3D11Buffer* CRenderer::m_ParameterBuffer = NULL;
@@ -395,6 +396,11 @@ void CRenderer::SetCameraPosition(D3DXVECTOR3 CameraPosition)
 void CRenderer::SetParameter(D3DXVECTOR4 Parameter)
 {
 	m_ImmediateContext->UpdateSubresource(m_ParameterBuffer, 0, NULL, &Parameter, 0, 0);
+}
+
+void CRenderer::SetTime(Time time)
+{
+	m_ImmediateContext->UpdateSubresource(m_TimeBuffer, 0, NULL, &time, 0, 0);
 }
 
 // 頂点シェーダ生成

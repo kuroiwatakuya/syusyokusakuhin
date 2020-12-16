@@ -1,9 +1,5 @@
 #pragma once
-
-
-
-
-
+#include "manager.h"
 // 頂点構造体
 struct VERTEX_3D
 {
@@ -14,7 +10,6 @@ struct VERTEX_3D
 	D3DXVECTOR3 Binormal = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Tangent = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 };
-
 
 
 // マテリアル構造体
@@ -28,7 +23,11 @@ struct MATERIAL
 	float		Dummy[3];//16byte境界用
 };
 
-
+//時間構造体
+struct Time
+{
+	float  Time;
+};
 
 
 // マテリアル構造体
@@ -69,9 +68,9 @@ private:
 	//static:インスタンスを作らなくても使えるメンバ変数を使える
 	static D3D_FEATURE_LEVEL       m_FeatureLevel;
 
-	static ID3D11Device*           m_D3DDevice;
-	static ID3D11DeviceContext*    m_ImmediateContext;
-	static IDXGISwapChain*         m_SwapChain;
+	static ID3D11Device* m_D3DDevice;
+	static ID3D11DeviceContext* m_ImmediateContext;
+	static IDXGISwapChain* m_SwapChain;
 	static ID3D11RenderTargetView* m_RenderTargetView;
 	static ID3D11DepthStencilView* m_DepthStencilView;
 
@@ -82,12 +81,10 @@ private:
 	static ID3D11Buffer* m_LightBuffer;
 	static ID3D11Buffer* m_CameraBuffer;
 	static ID3D11Buffer* m_ParameterBuffer;
+	static ID3D11Buffer* m_TimeBuffer;
 
 	static ID3D11DepthStencilState* m_DepthStateEnable;
 	static ID3D11DepthStencilState* m_DepthStateDisable;
-
-
-
 
 public:
 	//基本関数
@@ -105,12 +102,11 @@ public:
 	static void SetLight(LIGHT Light);
 
 	static void SetCameraPosition(D3DXVECTOR3 CameraPosition);
+	static void SetTime(Time Time);
 	static void SetParameter(D3DXVECTOR4 Parameter);
 
 	static ID3D11Device* GetDevice( void ){ return m_D3DDevice; }
 	static ID3D11DeviceContext* GetDeviceContext( void ){ return m_ImmediateContext; }
-
-
 
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader(ID3D11PixelShader** PixelShader, const char* FileName);
