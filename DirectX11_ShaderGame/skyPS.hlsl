@@ -32,19 +32,6 @@ static const float g2 = g * g;
 Texture2D g_Texture : register(t0);
 SamplerState g_SamplerState : register(s0);
 
-//===============================================
-//大気散乱シミュレーション
-//===============================================
-VERTEX vert(in VS_IN In)
-{
-    VERTEX o;
-    float4 vt = In.Position;
-    o.Position = mul(World, In.Position);   
-    o.UV = g_Texture.Sample(g_SamplerState, In.TexCoord);
-    o.WorldPos = normalize(mul(World, vt).xyz) * fouterRadius;
-    return o;
-}
-
 float Scale(float fcos)
 {
     float x = 1.0 - fcos;
@@ -68,7 +55,7 @@ float3 IntersectionPos(float3 dir,float3 a,float radius)
 //=======================================
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
-    float3 worldpos = In.WorldPosition;
+    float3 worldpos = In.WorldPosition * fouterRadius;
     worldpos = IntersectionPos(normalize(worldpos), float3(0.0, finnerRadius, 0.0), fouterRadius);
     
     float3 v3Camerapos = float3(0.0,finnerRadius,0.0);

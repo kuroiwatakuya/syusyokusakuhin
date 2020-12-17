@@ -37,9 +37,17 @@ void CGame::Init()
 
 	//アイテム配置
 	//アイテムの追加するときはここ
-	AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-3.0f, 0.0f, 2.0f));
-	AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-1.0f, 0.0f, 3.0));
-	AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(1.0f, 0.0f, 1.0f));
+	//AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-3.0f, 0.0f, 2.0f));
+	//AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(-1.0f, 0.0f, 3.0));
+	//AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(1.0f, 0.0f, 1.0f));
+
+	//タワー
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(3.0f, 0.0f, 1.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(4.0f, 0.0f, 2.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(5.0f, 0.0f, 4.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(8.0f, 0.0f, 2.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(-5.0f, 0.0f, 6.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(-2.0f, 0.0f, 3.0f));
 
 	AddGameObject<CField>(1);
 

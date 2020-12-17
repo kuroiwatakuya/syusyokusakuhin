@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "polygon.h"
 #include "skydome.h"
+#include "tower.h"
 #include "Camera.h"
 #include "scene.h"
 #include <typeinfo>

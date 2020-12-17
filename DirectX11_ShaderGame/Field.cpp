@@ -11,33 +11,33 @@ void CField::Init()
 	VERTEX_3D vertex[4];
 
 	//3D空間上の座標を定義する
-	vertex[0].Position = D3DXVECTOR3(-100.0f, 0.0f, 100.0f);
+	vertex[0].Position = D3DXVECTOR3(-110.0f, 0.0f, 110.0f);
 	vertex[0].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);	//法線方向は上に向かせるのでyに1を入れる
 	vertex[0].Binormal = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	vertex[0].Tangent = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	vertex[0].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = D3DXVECTOR2(0.0f, 0.0f);
 
-	vertex[1].Position = D3DXVECTOR3(100.0f, 0.0f, 100.0f);
+	vertex[1].Position = D3DXVECTOR3(110.0f, 0.0f, 110.0f);
 	vertex[1].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	vertex[1].Binormal = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	vertex[1].Tangent = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	vertex[1].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[1].TexCoord = D3DXVECTOR2(70.0f, 0.0f);
+	vertex[1].TexCoord = D3DXVECTOR2(50.0f, 0.0f);
 
-	vertex[2].Position = D3DXVECTOR3(-100.0f, 0.0f, -100.0f);
+	vertex[2].Position = D3DXVECTOR3(-110.0f, 0.0f, -110.0f);
 	vertex[2].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	vertex[2].Binormal = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	vertex[2].Tangent = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	vertex[2].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[2].TexCoord = D3DXVECTOR2(0.0f, 70.0f);
+	vertex[2].TexCoord = D3DXVECTOR2(0.0f, 50.0f);
 
-	vertex[3].Position = D3DXVECTOR3(100.0f, 0.0f, -100.0f);
+	vertex[3].Position = D3DXVECTOR3(110.0f, 0.0f, -110.0f);
 	vertex[3].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	vertex[3].Binormal = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	vertex[3].Tangent = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	vertex[3].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[3].TexCoord = D3DXVECTOR2(70.0f, 70.0f);
+	vertex[3].TexCoord = D3DXVECTOR2(50.0f, 50.0f);
 
 	//頂点バッファ作成
 	D3D11_BUFFER_DESC bd;

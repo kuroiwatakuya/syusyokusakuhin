@@ -177,6 +177,7 @@
     <ClInclude Include="scene.h" />
     <ClInclude Include="skydome.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="tower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="skydome.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Initilize.rc" />

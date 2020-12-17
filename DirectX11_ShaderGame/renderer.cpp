@@ -271,8 +271,6 @@ void CRenderer::Init()
 	material.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	material.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	SetMaterial(material);
-
-
 }
 
 
@@ -374,20 +372,15 @@ void CRenderer::SetProjectionMatrix(D3DXMATRIX* ProjectionMatrix)
 	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &projection, 0, 0);
 }
 
-
-
 void CRenderer::SetMaterial(MATERIAL Material)
 {
-
 	m_ImmediateContext->UpdateSubresource(m_MaterialBuffer, 0, NULL, &Material, 0, 0);
-
 }
 void CRenderer::SetLight(LIGHT Light)
 {
-
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
-
 }
+
 void CRenderer::SetCameraPosition(D3DXVECTOR3 CameraPosition)
 {
 	m_ImmediateContext->UpdateSubresource(m_CameraBuffer, 0, NULL, &D3DXVECTOR4(CameraPosition.x, CameraPosition.y, CameraPosition.z, 1.0f), 0, 0);

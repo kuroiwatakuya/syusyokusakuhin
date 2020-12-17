@@ -99,6 +99,9 @@
     <ClInclude Include="model.h">
       <Filter>ヘッダー ファイル\draw</Filter>
     </ClInclude>
+    <ClInclude Include="tower.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp">
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="model.cpp">
       <Filter>ソース ファイル\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="tower.cpp">
+      <Filter>ソース ファイル\object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

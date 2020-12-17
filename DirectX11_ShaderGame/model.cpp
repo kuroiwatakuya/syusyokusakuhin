@@ -490,6 +490,7 @@ void CModel::LoadMaterial( const char *FileName, MODEL_MATERIAL **MaterialArray,
 
 			strcat( materialArray[ mc ].TextureName, path );
 		}
+		
 	}
 
 	fclose(file);

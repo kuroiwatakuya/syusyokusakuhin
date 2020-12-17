@@ -2,16 +2,14 @@
 
 Texture2D g_Texture : register(t0);
 Texture2D g_TextureNormal : register(t1);
-Texture2D g_TextureMetallic : register(t2);
-Texture2D g_TextureRoughness : register(t3);
+Texture2D g_TextureRoughness : register(t2);
+Texture2D g_TextureMetallic : register(t3);
 
 SamplerState g_SamplerState;
 
 #define DILECTRICF0 0.04  //誘電体の反射率(F0)は4％
 #define PI 3.1415926535      //円周率
 #define INV_PI 0.31830988618
-#define ROUGHNESS 0.5           //メタリック仮定数
-#define METALLIC 0.1                //ラフネス仮定数
 
 //===========================================================
 //拡散反射
@@ -76,7 +74,7 @@ inline half4 BRDF(half3 albedo, half metallic, half perceptualRoughness, float3 
     float alpha = perceptualRoughness * perceptualRoughness;
     float V = V_SmithGGXCorrelated(ndotl, ndotv, alpha);
     float D = D_GGX(perceptualRoughness, ndotv, normal, halfDir);
-    float3 F = F_Schlick(f0, ldoth); // マイクロファセットベースのスペキュラBRDFではcosはldothが使われる
+    float3 F = F_Schlick(f0, ldoth);                                                        // マイクロファセットベースのスペキュラBRDFではcosはldothが使われる
     float3 specular = V * D * F * ndotl * lightColor;
     
     specular *= PI;
@@ -93,10 +91,16 @@ void main(in PS_IN In,out float4 outDiffuse : SV_Target)
      //法線マッピング
     float4 normalMap = g_TextureNormal.Sample(g_SamplerState, In.TexCoord);
     normalMap = (normalMap * 2.0) - 1.0; //-1から+1に補正する
-    
     normalMap = (-normalMap.x * In.Tangent) + (normalMap.y * In.Binormal) + (normalMap.z * In.Normal);
     normalMap.w = 0.0f;
     normalMap = normalize(normalMap);
+    
+    //ラフネス
+    float4 roughnessMap = g_TextureRoughness.Sample(g_SamplerState, In.TexCoord);
+    roughnessMap = (roughnessMap * 2.0) - 1.0;
+    roughnessMap = (-roughnessMap.x * In.Tangent) + (roughnessMap.y * In.Binormal) + (roughnessMap.z * In.Normal);
+    roughnessMap.w = 0.0f;
+    roughnessMap = normalize(roughnessMap);
     
     //メタリック
     float4 metallMap = g_TextureMetallic.Sample(g_SamplerState, In.TexCoord);
@@ -105,13 +109,6 @@ void main(in PS_IN In,out float4 outDiffuse : SV_Target)
     metallMap.w = 0.0f;
     metallMap = normalize(metallMap);
    
-    //ラフネス
-    float4 roughnessMap = g_TextureRoughness.Sample(g_SamplerState, In.TexCoord);
-    roughnessMap = (roughnessMap * 2.0) - 1.0;
-    roughnessMap = (-roughnessMap.x * In.Tangent) + (roughnessMap.y * In.Binormal) + (roughnessMap.z * In.Normal);
-    roughnessMap.w = 0.0f;
-    roughnessMap = normalize(roughnessMap);
-    
     //座標変換が必要
     float4 normal = normalMap;
     normal = normalize(normal);
