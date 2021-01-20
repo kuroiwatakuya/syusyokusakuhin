@@ -156,7 +156,6 @@ void CField::Draw()
 	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);
 	CRenderer::GetDeviceContext()->PSSetShaderResources(1, 1, &m_TextureNormal);		//第一引数:2番目のテクスチャーとして登録する 第二引数:配列番号
 	CRenderer::GetDeviceContext()->PSSetShaderResources(2, 1, &m_TextureHeight);
-
 	//プリミティブトポロジ設定
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 

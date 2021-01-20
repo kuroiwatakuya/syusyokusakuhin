@@ -93,34 +93,35 @@ void CRenderer::Init()
 	m_D3DDevice->CreateRenderTargetView(pBackBuffer, NULL, &m_RenderTargetView);
 	pBackBuffer->Release();
 
-	//深度ステンシル用テクスチャー作成
-	//奥行き情報を管理するバッファ
-	ID3D11Texture2D* depthTexture = NULL;
-	D3D11_TEXTURE2D_DESC td;
-	ZeroMemory(&td, sizeof(td));
-	td.Width = sd.BufferDesc.Width;
-	td.Height = sd.BufferDesc.Height;
-	td.MipLevels = 1;
-	td.ArraySize = 1;
-	td.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	td.SampleDesc = sampleDesc;
-	td.Usage = D3D11_USAGE_DEFAULT;
-	td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	td.CPUAccessFlags = 0;
-	td.MiscFlags = 0;
-	m_D3DDevice->CreateTexture2D(&td, NULL, &depthTexture);
+	{
+		//深度ステンシル用テクスチャー作成
+		//奥行き情報を管理するバッファ
+		ID3D11Texture2D* depthTexture = NULL;
+		D3D11_TEXTURE2D_DESC td;
+		ZeroMemory(&td, sizeof(td));
+		td.Width = sd.BufferDesc.Width;
+		td.Height = sd.BufferDesc.Height;
+		td.MipLevels = 1;
+		td.ArraySize = 1;
+		td.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		td.SampleDesc = sampleDesc;
+		td.Usage = D3D11_USAGE_DEFAULT;
+		td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		td.CPUAccessFlags = 0;
+		td.MiscFlags = 0;
+		m_D3DDevice->CreateTexture2D(&td, NULL, &depthTexture);
 
-	//深度ステンシルターゲット作成
-	D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
-	ZeroMemory(&dsvd, sizeof(dsvd));
-	dsvd.Format = td.Format;
-	dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
-	dsvd.Flags = 0;
-	m_D3DDevice->CreateDepthStencilView(depthTexture, &dsvd, &m_DepthStencilView);
+		//深度ステンシルターゲット作成
+		D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
+		ZeroMemory(&dsvd, sizeof(dsvd));
+		dsvd.Format = td.Format;
+		dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+		dsvd.Flags = 0;
+		m_D3DDevice->CreateDepthStencilView(depthTexture, &dsvd, &m_DepthStencilView);
 
+	}
 
 	m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
-
 
 	// ビューポート設定
 	//見える範囲を管理する
@@ -263,8 +264,6 @@ void CRenderer::Init()
 	light.Enable = false;
 	SetLight(light);
 
-
-
 	// マテリアル初期化
 	MATERIAL material;
 	ZeroMemory(&material, sizeof(material));
@@ -291,9 +290,7 @@ void CRenderer::Uninit()
 	m_SwapChain->Release();
 	m_ImmediateContext->Release();
 	m_D3DDevice->Release();
-
 }
-
 
 //========================================
 //スタート処理
@@ -305,9 +302,7 @@ void CRenderer::Begin()
 	float ClearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	m_ImmediateContext->ClearRenderTargetView(m_RenderTargetView, ClearColor);
 	m_ImmediateContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-
 }
-
 
 //========================================
 //終了処理
@@ -378,6 +373,7 @@ void CRenderer::SetMaterial(MATERIAL Material)
 }
 void CRenderer::SetLight(LIGHT Light)
 {
+	
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
 }
 

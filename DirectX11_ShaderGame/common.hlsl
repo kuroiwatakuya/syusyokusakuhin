@@ -40,6 +40,7 @@ struct PS_IN
 	float2 TexCoord			:TEXCOORD0;
     float4 Tangent           : TANGENT0;
     float4 Binormal          : BINORMAL0;
+  
 };
 
 struct DATA
@@ -83,6 +84,9 @@ struct LIGHT
     float4 Direction;
     float4 Diffuse;
     float4 Ambient;
+    
+    matrix View;
+    matrix Projection;
 };
 
 cbuffer LightBuffer : register(b4)

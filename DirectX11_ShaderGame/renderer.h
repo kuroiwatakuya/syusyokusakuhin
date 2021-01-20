@@ -46,6 +46,7 @@ struct DX11_SUBSET
 	DX11_MODEL_MATERIAL	Material;
 };
 
+//ÉâÉCÉgç\ë¢ëÃ
 struct LIGHT
 {
 	BOOL		Enable;
@@ -53,6 +54,7 @@ struct LIGHT
 	D3DXVECTOR4	Direction;
 	D3DXCOLOR	Diffuse;
 	D3DXCOLOR	Ambient;
+
 };
 
 
@@ -107,7 +109,7 @@ public:
 
 	static ID3D11Device* GetDevice( void ){ return m_D3DDevice; }
 	static ID3D11DeviceContext* GetDeviceContext( void ){ return m_ImmediateContext; }
-
+	
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader(ID3D11PixelShader** PixelShader, const char* FileName);
 

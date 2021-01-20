@@ -6,9 +6,14 @@
 #include "Fade.h"
 #include "title.h"
 #include "game.h"
+#include "Player.h"
+#include "Field.h"
+#include "polygon.h"
 
 CScene* CManager::m_Scene = NULL;
 D3DXVECTOR3 g_Position;
+
+
 //========================================
 //初期化
 //========================================
@@ -68,10 +73,7 @@ void CManager::Update()
 //========================================
 void CManager::Draw()
 {
-	//先にRendererを書く
-	//カメラ,3D,2Dの順番で描画していくこと
 	CRenderer::Begin();
-	
 	//ライトを使いたいとき
 	LIGHT light;
 	light.Enable = true;
@@ -80,10 +82,12 @@ void CManager::Draw()
 	D3DXVec4Normalize(&light.Direction, &light.Direction);
 	light.Ambient = D3DXCOLOR(0.1f, 0.1f, 0.1f, 1.0f);
 	light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	
 	CRenderer::SetLight(light);
 
 	m_Scene->Draw();
 	CFade::Draw();
+
 	//最後にend
 	CRenderer::End();
 }
