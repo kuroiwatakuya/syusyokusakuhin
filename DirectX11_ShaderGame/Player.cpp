@@ -31,8 +31,8 @@ void CPlayer::Init()
 
 	m_Frame = 0;
 
-	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "pixelLightingVS.cso");
-	CRenderer::CreatePixelShader(&m_PixelShader, "pixelLightingPS.cso");
+	CRenderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "brdfVS.cso");
+	CRenderer::CreatePixelShader(&m_PixelShader, "brdfPS.cso");
 }
 
 //========================================
@@ -98,6 +98,11 @@ void CPlayer::Update()
 	if (CInput::GetKeyPress('V'))
 	{
 		m_Position.y += 0.5f;
+	}
+
+	if (m_Position.y < 0)
+	{
+		m_Position.y = 0;
 	}
 
 	//’e‚Ì”­ŽËˆ—

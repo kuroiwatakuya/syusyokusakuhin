@@ -102,6 +102,12 @@
     <ClInclude Include="tower.h">
       <Filter>ヘッダー ファイル\object</Filter>
     </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp">
@@ -162,6 +168,12 @@
       <Filter>ソース ファイル\draw</Filter>
     </ClCompile>
     <ClCompile Include="tower.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
       <Filter>ソース ファイル\object</Filter>
     </ClCompile>
   </ItemGroup>

@@ -164,6 +164,7 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_object.h" />
+    <ClInclude Include="House.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Light.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="skydome.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="tower.h" />
+    <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation_model.cpp" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -200,6 +203,7 @@
     <ClCompile Include="skydome.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="tower.cpp" />
+    <ClCompile Include="wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Initilize.rc" />

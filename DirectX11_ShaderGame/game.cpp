@@ -7,6 +7,7 @@
 #include "title.h"
 #include "input.h"
 #include "game.h"
+#include "House.h"
 //#include "result.h"
 
 static bool g_bEnd = false;
@@ -42,13 +43,24 @@ void CGame::Init()
 	//AddGameObject<CItem>(1)->SetPosition(D3DXVECTOR3(1.0f, 0.0f, 1.0f));
 
 	//タワー
-	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(3.0f, 0.0f, 1.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(-3.0f, 0.0f, 30.0f));
 	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(4.0f, 0.0f, 2.0f));
-	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(5.0f, 0.0f, 4.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(5.0f, 0.0f, 20.0f));
 	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(8.0f, 0.0f, 2.0f));
-	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(-5.0f, 0.0f, 6.0f));
+	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(5.0f, 0.0f, 15.0f));
 	AddGameObject<CTower>(1)->SetPosition(D3DXVECTOR3(-2.0f, 0.0f, 3.0f));
 
+	//壁
+	//AddGameObject<CWall>(1)->SetPosition(D3DXVECTOR3(0.0f, 0.0f, 50.0f));
+
+	//家
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 0.0f));
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(-10.0f, 0.0f, 0.0f));
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 20.0f));
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(-10.0f, 0.0f, 20.0f));
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(10.0f, 0.0f, 40.0f));
+	AddGameObject<CHouse>(1)->SetPosition(D3DXVECTOR3(-10.0f, 0.0f, 40.0f));
+	
 	AddGameObject<CField>(1);
 
 	//2Dオブジェクト

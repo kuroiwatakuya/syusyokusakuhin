@@ -12,6 +12,7 @@
 #include "polygon.h"
 #include "skydome.h"
 #include "tower.h"
+#include "wall.h"
 #include "Camera.h"
 #include "scene.h"
 #include <typeinfo>

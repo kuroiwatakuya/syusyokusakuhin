@@ -73,7 +73,6 @@ void CTower::Uninit()
 	m_TextureNormal->Release();
 	m_TextureRoughness->Release();
 	m_TextureMetall->Release();
-
 }
 //=======================================================
 //スカイドーム更新処理
