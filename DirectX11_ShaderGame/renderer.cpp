@@ -23,7 +23,6 @@ ID3D11Buffer* CRenderer::m_TimeBuffer = NULL;
 ID3D11Buffer* CRenderer::m_CameraBuffer = NULL;
 ID3D11Buffer* CRenderer::m_ParameterBuffer = NULL;
 
-
 ID3D11DepthStencilState* CRenderer::m_DepthStateEnable = NULL;
 ID3D11DepthStencilState* CRenderer::m_DepthStateDisable = NULL;
 

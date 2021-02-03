@@ -21,7 +21,7 @@ inline half Fd_Burley(half ndotv, half ndotl, half ldoth, half roughness)
     half viewScatter = (1 + (fd90 - 1) * pow(1 - ndotv, 5));
     
     half diffuse = lightScatter * viewScatter; 
-    //diffuse /= PI;
+    diffuse /= PI;
     return diffuse;
 }
 //===========================================================
@@ -77,10 +77,10 @@ inline half4 BRDF(half3 albedo, half metallic, half perceptualRoughness, float3 
     float3 F = F_Schlick(f0, ldoth);                                                        // マイクロファセットベースのスペキュラBRDFではcosはldothが使われる
     float3 specular = V * D * F * ndotl * lightColor;
     
-    specular *= PI;
+    //specular *= PI;
     specular = max(0, specular);
 
-    half3 color = diffuse/* + specular*/;
+    half3 color = diffuse + specular;
     return half4(color, 1);
 }
 //=============================
@@ -118,18 +118,18 @@ void main(in PS_IN In,out float4 outDiffuse : SV_Target)
     half metallic = metallMap;                                                                      //メタリック
     half perceptualRoughness = roughnessMap;                                            //ラフネス
     
-    float light = 0.5 - dot(normal.xyz, Light.Direction.xyz) * 0.5;
+    //float light = 0.5 - dot(normal.xyz, Light.Direction.xyz) * 0.5;
     
-    if (light > 0.5)
-    {
-        light = 1.0;
-    }
-    else
-    {
-        light = 0.5;
-    }
+    //if (light > 0.5)
+    //{
+    //    light = 1.0;
+    //}
+    //else
+    //{
+    //    light = 0.5;
+    //}
     
-    outDiffuse.rgb *= In.Diffuse.rgb * light;
+    //outDiffuse.rgb *= In.Diffuse.rgb * light;
     
     //視線ベクトル計算
     float3 ViewDir = In.WorldPosition.xyz - CameraPosition.xyz;
@@ -138,10 +138,10 @@ void main(in PS_IN In,out float4 outDiffuse : SV_Target)
     outDiffuse = BRDF(albedo, metallic, perceptualRoughness, normal.xyz, ViewDir, Light.Direction.xyz, Light.Diffuse.rgb);
     
     //輪郭描画
-    float d = dot(ViewDir, normal.xyz);
+    //float d = dot(ViewDir, normal.xyz);
     
-    if (d > -0.3)
-    {
-        outDiffuse.rgb *= 0.0;
-    }
+    //if (d > -0.3)
+    //{
+    //    outDiffuse.rgb *= 0.0;
+    //}
 }
